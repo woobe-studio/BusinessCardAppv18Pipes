@@ -27,4 +27,17 @@ h2 {
     background-color: lightgoldenrodyellow;
   }
 
-  
+.number-row,
+.currency-row,
+.date-row {
+  display: flex;
+  gap: 15px; /* Space between items */
+  margin: 10px 0; /* Space around the row */
+}
+
+.number-row p,
+.currency-row p,
+.date-row p {
+  margin: 0; /* Remove default paragraph margin */
+}
+

@@ -13,37 +13,44 @@ import { InterestService } from '../interest.service';
 @Component({
   selector: 'app-business',
   standalone: true,
-  imports: [FilterDataPipe,PlDatePipe,MyPipePipe,CommonModule, FormsModule, ShowDateComponent, ManageInterestListComponent, EditInterestDataComponent],
+  imports: [
+    FilterDataPipe, PlDatePipe, MyPipePipe, CommonModule, FormsModule,
+    ShowDateComponent, ManageInterestListComponent, EditInterestDataComponent
+  ],
   templateUrl: './business.component.html',
   providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
-  styleUrl: './business.component.css'
+  styleUrls: ['./business.component.css']
 })
 export class BusinessComponent {
-  name: string;
-  surname: string;
-  dateOfBirth: Date;
+  // Properties for the data previously defined in HTML
+  titlecaseText: string = 'Capital letters in a sentence';
+  currencyAmount: number = 1.23;
+  dateNumber: number = 1.23456789;
+  dateOfBirth: Date = new Date('2000-03-18');
+  currencyCode: string = 'PLN';
+  currencySymbol: string = 'zł';
+
+  name: string = 'Joanna';
+  surname: string = 'Krupa';
   interests: string[];
-  selected=-1;
+  selected: number = -1;
 
-  constructor(private interstService: InterestService) { 
-    this.name = 'Joanna';
-    this.surname = 'Krupa';
-    this.dateOfBirth = new Date('2000-03-18');
-    this.interests = interstService.Interests;
-  }
-
-  select(which:number):void{
-    this.selected=which;
-  }
-
-  saveChangedInterest(newInterest:string):void{
-    this.interests[this.selected]=newInterest;
-    this.selected=-1;
-  }
-
-  messageMapping: {[k: string]: string} = {
+  messageMapping: { [k: string]: string } = {
     '=0': 'No messages.',
     '=1': 'One message.',
     'other': '# messages.',
   };
+
+  constructor(private interestService: InterestService) {
+    this.interests = interestService.Interests;
+  }
+
+  select(which: number): void {
+    this.selected = which;
+  }
+
+  saveChangedInterest(newInterest: string): void {
+    this.interests[this.selected] = newInterest;
+    this.selected = -1;
+  }
 }
